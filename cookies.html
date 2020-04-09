@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>A14 Cookie Assignment</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+        
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        
+        function checkCookie() {
+            var user = getCookie("username");
+            if (user != "") {
+                alert("I see you've returned, " + user + "! :)");
+            } else {
+                user = prompt("Enter your name:", "");
+                if (user != "" && user != null) {
+                    setCookie("username", user, 365);
+                }
+            }
+        }
+        
+    </script>
+    </head>
+    <body onload="checkCookie()">
+        <h1>&copy; Samantha Tolentino, 04/11</h1>
+        <p>Welcome to my website! This is the assignment for 
+        A14, which uses cookies. Below is a picture of myself
+        that I've drawn. :)</p>
+        <img src="discord icon.png" alt="icon">
+</body>
+</html>
